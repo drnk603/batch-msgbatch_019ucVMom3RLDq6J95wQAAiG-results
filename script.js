@@ -151,7 +151,7 @@
     var isHome =
       location.pathname === '/' ||
       location.pathname === '/index.html' ||
-      /^/index.html(?.*)?$/.test(location.pathname);
+      /^\/index\.html(\?.*)?$/.test(location.pathname);
 
     var anchors = document.querySelectorAll('a[href^="#"]');
     for (var i = 0; i < anchors.length; i++) {
@@ -193,7 +193,7 @@
     app.activeMenuReady = true;
 
     var links = document.querySelectorAll('.c-nav__link, .nav-link');
-    var pathname = location.pathname.replace(//index.html$/, '/') || '/';
+    var pathname = location.pathname.replace(/\/index\.html$/, '/') || '/';
     var isHome = pathname === '/' || pathname === '';
 
     for (var i = 0; i < links.length; i++) {
@@ -201,7 +201,7 @@
       var linkPath = link.getAttribute('href');
       if (!linkPath) continue;
 
-      linkPath = linkPath.replace(//index.html$/, '/') || '/';
+      linkPath = linkPath.replace(/\/index\.html$/, '/') || '/';
 
       link.removeAttribute('aria-current');
       link.classList.remove('is-active', 'active');
@@ -421,12 +421,12 @@
       },
       email: function (val) {
         if (!val || !val.trim()) return 'Email address is required.';
-        if (!/^[^s@]+@[^s@]+.[^s@]+$/.test(val.trim())) return 'Please enter a valid email address.';
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val.trim())) return 'Please enter a valid email address.';
         return '';
       },
       phone: function (val) {
         if (!val || !val.trim()) return '';
-        if (!/^[-ds+()]{7,20}$/.test(val.trim())) return 'Phone number must be 7–20 digits and may include +, -, (, ), spaces.';
+        if (!/^[-\d\s+()]{7,20}$/.test(val.trim())) return 'Phone number must be 7–20 digits and may include +, -, (, ), spaces.';
         return '';
       },
       message: function (val) {
